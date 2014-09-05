@@ -51,6 +51,7 @@ install_notebook_pkgs() {
         spyder 
         #theano
     ${PIP_BIN} install \
+        future \
         mpld3 \
         plotly matplotlylib \
         rest-pandas \
