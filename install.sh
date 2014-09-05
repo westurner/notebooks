@@ -20,8 +20,11 @@ install_pip() {
 }
 
 install_conda() {
-    ${PIP_BIN} install ${PIP_USER} --upgrade conda
-    CONDA_BIN=$(which conda)
+    if [ -z "${CONDA_BIN}" ]; then
+        ${PIP_BIN} install ${PIP_USER} --upgrade conda
+        CONDA_BIN=$(which conda)
+        ${CONDA_BIN} init
+    fi
 }
 
 install_notebook_pkgs() {
