@@ -22,6 +22,8 @@ run-all:
 
 html-all:
 	#find . -name '*.ipynb' -exec ipython nbconvert {} --to html \;
+	# Note: careful with filenames containing HTML characters
+	# TODO: python script + jinja template
 	cat index.html.head > index.html
 	find . -name '*.ipynb' -print0 | while read -d $$'\0' file; \
 	do \
