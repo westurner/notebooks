@@ -52,6 +52,7 @@ install_notebook_pkgs() {
         #theano
     ${PIP_BIN} install \
         future \
+        seaborn \
         mpld3 \
         plotly matplotlylib \
         rest-pandas \
