@@ -4,6 +4,8 @@
 
 INSTALLDIR="./downloads"
 
+PYTHON_BIN=$(which python)
+
 PIP_BIN=$(which pip)
 PIP_USER=""
 
@@ -27,7 +29,7 @@ install_conda() {
     fi
 }
 
-install_notebook_pkgs() {
+install_pkgs() {
     ${CONDA_BIN} install --yes \
         grin \
         curl pycurl ssl_match_hostname \
@@ -63,10 +65,15 @@ install_notebook_pkgs() {
     # ${PIP_BIN} install MySQL-python
 }
 
+install_mathjax() {
+    ${PYTHON_BIN} -c 'from IPython.external import mathjax; mathjax.install_mathjax()'
+}
+
 main() {
     install_pip && \
     install_conda && \
-    install_notebook_pkgs
+    install_pkgs && \
+    install_mathjax
 }
 
 if [[ "$BASH_SOURCE" == "$0" ]]; then
