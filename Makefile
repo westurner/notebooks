@@ -12,6 +12,9 @@ install:
 	# mkvirtualenv <name>
 	bash ./install.sh
 
+nb:
+	ipython notebook --secure --ip=127.0.0.1 --notebook-dir=.
+
 test: test_all
 
 test-all:
