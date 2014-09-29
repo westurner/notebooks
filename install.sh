@@ -30,6 +30,8 @@ install_conda() {
 }
 
 install_pkgs() {
+    # install makeindex.py requirements
+    ${PIP_BIN} install -r requirements.txt
     ${CONDA_BIN} install --yes \
         grin \
         curl pycurl ssl_match_hostname \
