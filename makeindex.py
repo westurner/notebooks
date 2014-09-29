@@ -41,10 +41,16 @@ def find_notebooks(path, pattern='*.ipynb',
                 'nbviewer': base_url and _base_url / ipynb}
 
 
-def makeindex(path='.', pattern='*.ipynb', base_url=None,
+def makeindex(template, path='.',
+              pattern='*.ipynb',
+              base_url=None,
               filterfn=filter_ipynb):
     """
     Generate an HTML index for a set of ipython notebooks
+
+    Templates:
+     * index.jinja  -- HTML index
+     * readme.jinja -- README.md index
     """
     context = {
         'notebooks': list(
@@ -53,7 +59,7 @@ def makeindex(path='.', pattern='*.ipynb', base_url=None,
     templatedir = Path.path(__file__).abspath().dirname() / 'templates'
     loader = jinja2.FileSystemLoader(templatedir)
     env = jinja2.Environment()  # autoescape=True
-    tmpl = loader.load(env, 'index.jinja')
+    tmpl = loader.load(env, template)
     return tmpl.render(context)
 
 
@@ -62,10 +68,17 @@ import unittest
 
 class Test_makeindex(unittest.TestCase):
 
-    def test_makeindex(self):
-        output = makeindex(path='.')
+    def test_makeindex_html(self):
+        output = makeindex('index.jinja', path='.')
         self.assertIn('IPython notebooks', output)
-        self.assertIn('<li><a href=".', output)
+        self.assertIn('<li>', output)
+        self.assertIn('<a href=".', output)
+
+    def test_makeindex_readme_md(self):
+        output = makeindex('readme.jinja', path='.')
+        self.assertIn('IPython notebooks', output)
+        self.assertIn('*', output)
+        self.assertIn('<a href=".', output)
 
 
 def main(*args):
@@ -77,6 +90,13 @@ def main(*args):
     prs.add_option('--base-url',
                    dest='base_url',
                    action='store')
+
+    prs.add_option('--html',
+                   dest='html',
+                   action='store_true')
+    prs.add_option('--readme',
+                   dest='readme',
+                   action='store_true')
 
     prs.add_option('-v', '--verbose',
                    dest='verbose',
@@ -101,8 +121,14 @@ def main(*args):
         sys.argv = [sys.argv[0]] + args
         sys.exit(unittest.main())
 
-    output = makeindex(path='.', base_url=opts.base_url)
-    print(output)
+    if opts.html:
+        output = makeindex("index.jinja", path='.', base_url=opts.base_url)
+        print(output)
+
+    if opts.readme:
+        output = makeindex("readme.jinja", path='.', base_url=opts.base_url)
+        print(output)
+
     return 0
 
 if __name__ == "__main__":

@@ -25,7 +25,15 @@ run-all:
 
 html-index:
 	python ./makeindex.py \
+		--html \
 		--base-url=/github/westurner/notebooks/blob/gh-pages/ > ./index.html
+
+readme-index:
+	python ./makeindex.py \
+		--readme \
+		--base-url=/github/westurner/notebooks/blob/gh-pages/ > ./README.md
+
+index: html-index readme-index
 
 html-all:
 	find . -name '*.ipynb' -print0 | while read -d $$'\0' file; \
@@ -37,6 +45,7 @@ html-all:
 		fi \
 	done;
 	$(MAKE) html-index
+	$(MAKE) readme-index
 
 
 
