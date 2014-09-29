@@ -1,0 +1,10 @@
+# IPython notebooks
+{%- for nb in notebooks %}
+* {% if nb.html %}
+<a href="{{ nb.html }}" target="_blank">{{ nb.html.replace('_','\_') }}</a>
+{%- endif %}
+  (<a href="{{ nb.ipynb }}" target="_blank">.ipynb source</a>)
+{%- if nb.nbviewer %}
+  [<a href="{{ nb.nbviewer }}" target="_blank">Open in nbviewer</a>]
+{%- endif %}
+{%- endfor %}
