@@ -1,0 +1,29 @@
+<html lang="en">
+<head>
+  <title>IPython notebooks</title>
+  <link rel="stylesheet" href="./static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./static/css/bootstrap-theme.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>IPython notebooks</h1>
+    </div>
+    <div class="jumbotron">
+      <ul>
+      {%- for nb in notebooks %}
+        <li>
+          {%- if nb.html %}
+          <a href="{{ nb.html }}" target="_blank">{{ nb.html }}</a>
+          {%- endif %}
+          (<a href="{{ nb.ipynb }}" target="_blank">.ipynb source</a>)
+          {%- if nb.nbviewer %}
+          [<a href="{{ nb.nbviewer }}" target="_blank">Open in nbviewer</a>]
+          {%- endif %}
+        </li>
+      {%- endfor %}
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

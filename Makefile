@@ -23,19 +23,22 @@ test-all:
 run-all:
 	find $(mkfile_dir) -name '*.ipynb' -exec runipy -o {} \;
 
+html-index:
+	python ./makeindex.py \
+		--base-url=/github/westurner/notebooks/blob/gh-pages/ > ./index.html
+
 html-all:
-	#find . -name '*.ipynb' -exec ipython nbconvert {} --to html \;
-	# Note: careful with filenames containing HTML characters
-	# TODO: python script + jinja template
-	cat index.html.head > index.html
 	find . -name '*.ipynb' -print0 | while read -d $$'\0' file; \
 	do \
-		cd $(mkfile_dir)/`dirname "$$file"`; \
-		ipython nbconvert "`basename $$file`" --to html; \
-		htmlfile=`echo "$$file" | sed 's/.ipynb$$/.html/g'` ; \
-		echo "<li><a href=\"$$htmlfile\">$$htmlfile</a></li>" >> $(mkfile_dir)/index.html; \
+		if [ ! -z `echo $$file | grep -v '.ipynb_checkpoints/'` ]; \
+			cd $(mkfile_dir)/`dirname "$$file"`; \
+			ipython nbconvert "`basename $$file`" --to html; \
+			htmlfile=`echo "$$file" | sed 's/.ipynb$$/.html/g'` ; \
+		fi \
 	done;
-	cat index.html.foot >> index.html
+	$(MAKE) html-index
+
+
 
 clean-html:
 	rm index.html
