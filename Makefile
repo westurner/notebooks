@@ -15,7 +15,7 @@ install:
 nb:
 	ipython notebook --secure --ip=127.0.0.1 --notebook-dir=.
 
-test: test_all
+test: test-all
 
 test-all:
 	find $(mkfile_dir) -name '*.ipynb' -exec runipy {} \;
