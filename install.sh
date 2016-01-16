@@ -3,7 +3,7 @@
 #
 
 _progname="$(basename ${0})"
-main_help() {
+function main_help {
 
     echo "${_progname} {pip conda notebook plotly [full spyder]}"
     echo "Install pip, conda, notebook, plotly, {'full'}, spyder"
@@ -14,7 +14,7 @@ main_help() {
 }
 
 
-main() {
+function main {
     set_PYTHON_BIN
     set_GET_PIP__PATH
     set_PIP_BIN
@@ -94,15 +94,15 @@ main() {
 }
 
 
-set_GET_PIP__PATH() {
+function set_GET_PIP__PATH {
     GET_PIP__PATH="./downloads"
 }
 
-set_PYTHON_BIN() {
+function set_PYTHON_BIN {
     PYTHON_BIN="$(which python)"
 }
 
-set_PIP_BIN() {
+function set_PIP_BIN {
 
     #
     #  PIP_OPTS=""  # "--upgrade" "--user" "--user --upgrade"
@@ -124,12 +124,12 @@ set_PIP_BIN() {
     PIP_INSTALL="${PIP_BIN} ${PIP_OPTS} install "
 }
 
-set_CONDA_BIN() {
+function set_CONDA_BIN {
     CONDA_BIN="$(which conda)"
     CONDA_INSTALL="${CONDA_BIN} install --yes "
 }
 
-install_pip() {
+function install_pip {
     GET_PIP="${GET_PIP__PATH}/get-pip.py"
     if [ -z "${PIP_BIN}" ]; then
         mkdir -p "${GET_PIP__PATH}";
@@ -139,12 +139,12 @@ install_pip() {
     fi
 }
 
-install_pip_requirements() {
+function install_pip_requirements {
     # install makeindex.py requirements
     ${PIP_INSTALL} -r requirements.txt
 }
 
-install_conda() {
+function install_conda {
     if [ -z "${CONDA_BIN}" ]; then
         ${PIP_INSTALL} --user --upgrade conda
         set_CONDA_BIN
@@ -152,7 +152,7 @@ install_conda() {
     fi
 }
 
-install_conda_pkgs_full() {
+function install_conda_pkgs_full {
     ${CONDA_INSTALL} \
         grin \
         curl pycurl ssl_match_hostname \
@@ -181,43 +181,43 @@ install_conda_pkgs_full() {
         keyring
 }
 
-install_conda_pkgs__notebook() {
+function install_conda_pkgs__notebook {
     ${CONDA_INSTALL} \
         notebook  # -> IPython
 }
 
-install_pip_pkgs__plotly() {
+function install_pip_pkgs__plotly {
     ${PIP_INSTALL} \
         plotly
 }
 
-install_pip_pkgs__matplotlylib() {
+function install_pip_pkgs__matplotlylib {
     ${PIP_INSTALL} \
         matplotlylib
 }
 
-install_pip_pkgs__rest_pandas() {
+function install_pip_pkgs__rest_pandas {
     ${PIP_INSTALL} \
         rest-pandas
 }
 
-install_pip_pkgs__mysql() {
+function install_pip_pkgs__mysql {
     ${PIP_INSTALL} \
         MySQL-python
 }
 
-install_pip_pkgs__pydatalog() {
+function install_pip_pkgs__pydatalog {
     ${PIP_INSTALL} \
         pydatalog
 }
 
-install_conda_pkgs__spyder() {
+function install_conda_pkgs__spyder {
     ${CONDA_INSTALL} \
         spyder 
         #theano
 }
 
-install_mathjax() {
+function install_mathjax {
     ${PYTHON_BIN} -c 'from IPython.external import mathjax; mathjax.install_mathjax()'
 }
 
