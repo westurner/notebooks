@@ -5,6 +5,9 @@ mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 mkfile_dir = $(shell dirname $(mkfile_path))
 
 CONDA_ENV_NAME=notebooks
+PYTHON_OPTS=PYTHONNOUSERSITE=1
+CONDA_OPTS=${PYTHON_OPTS}
+conda=${CONDA_OPTS} conda
 
 default:
 	@echo "Jupyter notebooks"
@@ -16,13 +19,13 @@ install:
 	# conda env cre
 
 conda-env-create:
-	conda env create -n "${CONDA_ENV_NAME}" -f='./environment.yml'
+	${conda} env create -n "${CONDA_ENV_NAME}" -f='./environment.yml'
 
 conda-env-update:
-	conda env update -n "${CONDA_ENV_NAME}" -f='./environment.yml'
+	${conda} env update -n "${CONDA_ENV_NAME}" -f='./environment.yml'
 
 conda-env-export:
-	conda env export -n "${CONDA_ENV_NAME}" | tee './environment.yml'
+	${conda} env export -n "${CONDA_ENV_NAME}" | tee './environment.yml'
 
 nb:
 	jupyter notebook --ip=127.0.0.1 --notebook-dir=.
@@ -30,9 +33,11 @@ nb:
 test: test-all
 
 test-all:
+	${PYTHON_OPTS} \
 	find $(mkfile_dir) -name '*.ipynb' ! -wholename '*.ipynb_checkpoints/*' -exec runipy {} \;
 
 run-all:
+	${PYTHON_OPTS} \
 	find $(mkfile_dir) -name '*.ipynb' ! -wholename '*.ipynb_checkpoints/*' -exec runipy -o {} \;
 
 html-index:
@@ -48,6 +53,7 @@ readme-index:
 index: html-index readme-index
 
 html-all:
+	${PYTHON_OPTS} \
 	find '${mkfile_dir}' -name '*.ipynb' ! -wholename '*.ipynb_checkpoints/*' -print0 \
 	| while read -d $$'\0' file; do \
 		cd "$$(dirname "$$file")"; \
