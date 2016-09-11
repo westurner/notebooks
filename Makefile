@@ -5,7 +5,7 @@ mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 mkfile_dir = $(shell dirname $(mkfile_path))
 
 default:
-	@echo "IPython notebooks"
+	@echo "Jupyter notebooks"
 
 install:
 	# pip install virtualenvwrapper
@@ -13,7 +13,7 @@ install:
 	bash ./install.sh
 
 nb:
-	ipython notebook --secure --ip=127.0.0.1 --notebook-dir=.
+	jupyter notebook --secure --ip=127.0.0.1 --notebook-dir=.
 
 test: test-all
 
