@@ -55,3 +55,6 @@ target/
 
 # UndoTree
 *.un~
+
+# Jupyter
+*/.ipynb_checkpoints/
