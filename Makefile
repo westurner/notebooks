@@ -4,6 +4,8 @@
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 mkfile_dir = $(shell dirname $(mkfile_path))
 
+CONDA_ENV_NAME=notebooks
+
 default:
 	@echo "Jupyter notebooks"
 
@@ -11,6 +13,13 @@ install:
 	# pip install virtualenvwrapper
 	# mkvirtualenv <name>
 	bash ./install.sh
+	# conda env cre
+
+conda-env-create:
+	conda env create -n "${CONDA_ENV_NAME}" -f='./environment.yml'
+
+conda-env-update:
+	conda env update -n "${CONDA_ENV_NAME}" -f='./environment.yml'
 
 nb:
 	jupyter notebook --secure --ip=127.0.0.1 --notebook-dir=.
