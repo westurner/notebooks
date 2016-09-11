@@ -27,10 +27,10 @@ nb:
 test: test-all
 
 test-all:
-	find $(mkfile_dir) -name '*.ipynb' -exec runipy {} \;
+	find $(mkfile_dir) -name '*.ipynb' ! -wholename '*.ipynb_checkpoints/*' -exec runipy {} \;
 
 run-all:
-	find $(mkfile_dir) -name '*.ipynb' -exec runipy -o {} \;
+	find $(mkfile_dir) -name '*.ipynb' ! -wholename '*.ipynb_checkpoints/*' -exec runipy -o {} \;
 
 html-index:
 	python ./makeindex.py \
@@ -45,13 +45,11 @@ readme-index:
 index: html-index readme-index
 
 html-all:
-	find . -name '*.ipynb' -print0 | while read -d $$'\0' file; \
-	do \
-		if [ ! -z `echo $$file | grep -v '.ipynb_checkpoints/'` ]; \
-			cd $(mkfile_dir)/`dirname "$$file"`; \
-			ipython nbconvert "`basename $$file`" --to html; \
-			htmlfile=`echo "$$file" | sed 's/.ipynb$$/.html/g'` ; \
-		fi \
+	find '${mkfile_dir}' -name '*.ipynb' ! -wholename '*.ipynb_checkpoints/*' -print0 \
+	| while read -d $$'\0' file; do \
+		cd "$$(dirname "$$file")"; \
+		jupyter nbconvert "`basename $$file`" --to html; \
+		htmlfile=`echo "$$file" | sed 's/.ipynb$$/.html/g'` ; \
 	done;
 	$(MAKE) html-index
 	$(MAKE) readme-index
