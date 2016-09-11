@@ -21,6 +21,9 @@ conda-env-create:
 conda-env-update:
 	conda env update -n "${CONDA_ENV_NAME}" -f='./environment.yml'
 
+conda-env-export:
+	conda env export -n "${CONDA_ENV_NAME}" | tee './environment.yml'
+
 nb:
 	jupyter notebook --ip=127.0.0.1 --notebook-dir=.
 
