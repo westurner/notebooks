@@ -64,6 +64,13 @@ html-all:
 	$(MAKE) readme-index
 
 
+py-all:
+	${PYTHON_OPTS} \
+	find '${mkfile_dir}' -name '*.ipynb' ! -wholename '*.ipynb_checkpoints/*' -print0 \
+	| while read -d $$'\0' file; do \
+		cd "$$(dirname "$$file")"; \
+		jupyter nbconvert "`basename $$file`" --to python; \
+	done;
 
 clean-html:
 	rm index.html
