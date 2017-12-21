@@ -27,7 +27,7 @@ def find_notebooks(path, pattern='*.ipynb',
     if base_url:
         _, _url = urllib.splittype(base_url)
         _base_url = base_url and Path.path(
-            u'/'.join(('http://nbviewer.ipython.org', _url.lstrip('/'))))
+            u'/'.join(('https://nbviewer.jupyter.org', _url.lstrip('/'))))
     _path = Path.path(path)
     for ipynb in _path.walk(pattern=pattern):
         if filterfn(ipynb):
@@ -70,13 +70,13 @@ class Test_makeindex(unittest.TestCase):
 
     def test_makeindex_html(self):
         output = makeindex('index.jinja', path='.')
-        self.assertIn('IPython notebooks', output)
+        self.assertIn('Jupyter notebooks', output)
         self.assertIn('<li>', output)
         self.assertIn('<a href=".', output)
 
     def test_makeindex_readme_md(self):
         output = makeindex('readme.jinja', path='.')
-        self.assertIn('IPython notebooks', output)
+        self.assertIn('Jupyter notebooks', output)
         self.assertIn('*', output)
         self.assertIn('<a href=".', output)
 
