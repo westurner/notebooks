@@ -4,8 +4,8 @@
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 mkfile_dir = $(shell dirname $(mkfile_path))
 
-CONDA_ENV_NAME=notebooks
-PYTHON_OPTS=PYTHONNOUSERSITE=1
+CONDA_ENV_NAME:=notebooks
+PYTHON_OPTS:=PYTHONNOUSERSITE=1
 CONDA_OPTS=${PYTHON_OPTS}
 conda=${CONDA_OPTS} conda
 
@@ -36,8 +36,31 @@ conda-env-create:
 conda-env-update:
 	${conda} env update -n "${CONDA_ENV_NAME}" -f='./environment.yml'
 
+environment.yml: conda-env-export
+
 conda-env-export:
-	${conda} env export -n "${CONDA_ENV_NAME}" | tee './environment.yml'
+	${conda} env export -n "${CONDA_ENV_NAME}" | \
+		grep -Ev '^(name|prefix): ' | \
+		tee './environment.versions.yml' | \
+		tee './environment.yml'
+
+conda-env-export-from-history:
+	${conda} env export -n "${CONDA_ENV_NAME}" --from-history | \
+		grep -Ev '^(name|prefix): ' | \
+		tee './environment.fromhistory.yml'
+	echo "# Note that pip packages and all conda channels (?) are not listed in this file" | \
+		tee -a './environment.fromhistory.yml'
+
+
+environment.noversions.yml: conda-env-stripversions
+
+conda-env-stripversions:  # conda-env-export
+	pyline -f environment.versions.yml "line.split('=', -1)[0]" | \
+	sed "s/- python$$/- python=3.7/g" | \
+	tee environment.noversions.yml
+
+conda-env-export-all: conda-env-export conda-env-stripversions \
+	conda-env-export-from-history
 
 nb:
 	jupyter notebook --ip=127.0.0.1 --notebook-dir=.
