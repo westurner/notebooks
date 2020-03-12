@@ -42,15 +42,23 @@ conda-env-export:
 nb:
 	jupyter notebook --ip=127.0.0.1 --notebook-dir=.
 
+
+jupyterlab:
+	jupyter-lab --ip=127.0.0.1 --notebook-dir=.
+
+lab: jupyterlab
+
+FIND_NOTEBOOKS=find $(mkfile_dir) -name '*.ipynb' ! -wholename '*.ipynb_checkpoints/*' ! -name '*.nbconvert.ipynb'
+
 test: test-all
 
 test-all:
 	${PYTHON_OPTS} \
-	find $(mkfile_dir) -name '*.ipynb' ! -wholename '*.ipynb_checkpoints/*' -exec runipy {} \;
+	${FIND_NOTEBOOKS} -exec echo \; -exec echo "## {}" \; -exec jupyter-nbconvert --execute --to notebook {} \;
 
 run-all:
 	${PYTHON_OPTS} \
-	find $(mkfile_dir) -name '*.ipynb' ! -wholename '*.ipynb_checkpoints/*' -exec runipy -o {} \;
+	${FIND_NOTEBOOKS} -exec echo \; -exec echo "## {}" \; -exec jupyter-nbconvert --execute --to notebook --inplace {} \;
 
 html-index:
 	python ./makeindex.py \
@@ -66,7 +74,7 @@ index: html-index readme-index
 
 html-all:
 	${PYTHON_OPTS} \
-	find '${mkfile_dir}' -name '*.ipynb' ! -wholename '*.ipynb_checkpoints/*' -print0 \
+	${FIND_NOTEBOOKS} -print0 \
 	| while read -d $$'\0' file; do \
 		cd "$$(dirname "$$file")"; \
 		jupyter nbconvert "`basename $$file`" --to html; \
@@ -78,7 +86,7 @@ html-all:
 
 py-all:
 	${PYTHON_OPTS} \
-	find '${mkfile_dir}' -name '*.ipynb' ! -wholename '*.ipynb_checkpoints/*' -print0 \
+	${FIND_NOTEBOOKS} -print0 \
 	| while read -d $$'\0' file; do \
 		cd "$$(dirname "$$file")"; \
 		jupyter nbconvert "`basename $$file`" --to python; \
