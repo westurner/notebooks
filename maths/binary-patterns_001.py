@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 # coding: utf-8
 
 # # Binary Patterns 001
@@ -7,6 +7,7 @@
 # ## combinations and probabilities
 
 # In[1]:
+
 
 # this is "wrong"
 # probability of feature 1, probability of feature 2
@@ -18,11 +19,13 @@ p1 + p2
 
 # In[2]:
 
+
 # this is "wrong"
 p1 * p2
 
 
 # In[3]:
+
 
 # what is this called?
 # reasoning: numbers smaller than 1 multiplied get smaller
@@ -31,12 +34,14 @@ print((1+p1)*(1+p2)-1)
 
 # In[4]:
 
+
 print((1+p1)*(1+p2)-(1*2))
 
 
 # ## a simple binary game
 
 # In[5]:
+
 
 # w,x,y,z,  s
 s1 = [
@@ -65,20 +70,30 @@ print(s2)
 
 # In[6]:
 
-from collections import defaultdict, OrderedDict
-class OrderedDefaultDict(OrderedDict, defaultdict):
-    def __init__(self, default_factory=None, *a, **kw):
-        OrderedDict.__init__(self, *a, **kw)
-        self.default_factory = default_factory
+
+import sys
+if sys.version_info[:2] <= (3, 6):
+    from collections import defaultdict, OrderedDict
+    class OrderedDefaultDict(OrderedDict, defaultdict):
+        def __init__(self, default_factory=None, *a, **kw):
+            OrderedDict.__init__(self, *a, **kw)
+            self.default_factory = default_factory
+else:
+    from collections import defaultdict
+    OrderedDefaultDict = defaultdict
+    
+if sys.version_info.major > 2:
+    from functools import reduce
+    
+import itertools
+import operator
 
 
 # In[7]:
 
+
 for ((w,x,y,z), s) in s1:
     print(w,x,y,z,s)
-    
-import itertools
-import operator
 
 def find_features(s1):
     f = OrderedDefaultDict(lambda: 0)
