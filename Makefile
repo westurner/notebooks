@@ -9,6 +9,18 @@ PYTHON_OPTS=PYTHONNOUSERSITE=1
 CONDA_OPTS=${PYTHON_OPTS}
 conda=${CONDA_OPTS} conda
 
+.PHONY: default install \
+	conda-env-create conda-env-update conda-env-export \
+	conda-env-stripversions \
+	nb \
+	test test-all \
+	run-all \
+	html-index readme-index \
+	html-all py-all \
+	clean-html \
+	clean
+
+
 default:
 	@echo "Jupyter notebooks"
 
