@@ -57,7 +57,9 @@ target/
 *.un~
 
 # Jupyter
+.ipynb_checkpoints/
 */.ipynb_checkpoints/
+*.nbconvert.ipynb
 
 # .keys
 .keys/
