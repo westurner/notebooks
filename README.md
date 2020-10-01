@@ -11,18 +11,6 @@ Miscellanous Jupyter notebooks by
 - Other tools:
   - [westurner.org/tools/#scipy-stack](https://westurner.org/tools/#scipy-stack)
 
-* <a href="USA/Untitled.ipynb" target="_blank">USA/Untitled.ipynb</a>
-  (<a href="USA/Untitled.ipynb" target="_blank">.ipynb source</a>)
-  [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/USA/Untitled.ipynb" target="_blank">Open in nbviewer</a>]
-* <a href="USA/climate_change_and_disaster_relief.ipynb" target="_blank">USA/climate\_change\_and\_disaster\_relief.ipynb</a>
-  (<a href="USA/climate_change_and_disaster_relief.ipynb" target="_blank">.ipynb source</a>)
-  [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/USA/climate_change_and_disaster_relief.ipynb" target="_blank">Open in nbviewer</a>]
-* <a href="USA/merica.html" target="_blank">USA/merica.html</a>
-  (<a href="USA/merica.ipynb" target="_blank">.ipynb source</a>)
-  [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/USA/merica.ipynb" target="_blank">Open in nbviewer</a>]
-* <a href="USA/merica_-_without.html" target="_blank">USA/merica\_-\_without.html</a>
-  (<a href="USA/merica_-_without.ipynb" target="_blank">.ipynb source</a>)
-  [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/USA/merica_-_without.ipynb" target="_blank">Open in nbviewer</a>]
 * <a href="business/entrepreneurship/business_fundamentals.ipynb" target="_blank">business/entrepreneurship/business\_fundamentals.ipynb</a>
   (<a href="business/entrepreneurship/business_fundamentals.ipynb" target="_blank">.ipynb source</a>)
   [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/business/entrepreneurship/business_fundamentals.ipynb" target="_blank">Open in nbviewer</a>]
@@ -41,18 +29,6 @@ Miscellanous Jupyter notebooks by
 * <a href="international/International-Financial-Aid_(per-capita).html" target="_blank">international/International-Financial-Aid\_(per-capita).html</a>
   (<a href="international/International-Financial-Aid_(per-capita).ipynb" target="_blank">.ipynb source</a>)
   [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/international/International-Financial-Aid_(per-capita).ipynb" target="_blank">Open in nbviewer</a>]
-* <a href="maths/Untitled.ipynb" target="_blank">maths/Untitled.ipynb</a>
-  (<a href="maths/Untitled.ipynb" target="_blank">.ipynb source</a>)
-  [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/maths/Untitled.ipynb" target="_blank">Open in nbviewer</a>]
-* <a href="maths/Untitled1.ipynb" target="_blank">maths/Untitled1.ipynb</a>
-  (<a href="maths/Untitled1.ipynb" target="_blank">.ipynb source</a>)
-  [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/maths/Untitled1.ipynb" target="_blank">Open in nbviewer</a>]
-* <a href="maths/Untitled2.ipynb" target="_blank">maths/Untitled2.ipynb</a>
-  (<a href="maths/Untitled2.ipynb" target="_blank">.ipynb source</a>)
-  [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/maths/Untitled2.ipynb" target="_blank">Open in nbviewer</a>]
-* <a href="maths/Untitled3.ipynb" target="_blank">maths/Untitled3.ipynb</a>
-  (<a href="maths/Untitled3.ipynb" target="_blank">.ipynb source</a>)
-  [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/maths/Untitled3.ipynb" target="_blank">Open in nbviewer</a>]
 * <a href="maths/algebra_and_growth_curves.ipynb" target="_blank">maths/algebra\_and\_growth\_curves.ipynb</a>
   (<a href="maths/algebra_and_growth_curves.ipynb" target="_blank">.ipynb source</a>)
   [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/maths/algebra_and_growth_curves.ipynb" target="_blank">Open in nbviewer</a>]
@@ -74,10 +50,34 @@ Miscellanous Jupyter notebooks by
 * <a href="maths/infinityy.ipynb" target="_blank">maths/infinityy.ipynb</a>
   (<a href="maths/infinityy.ipynb" target="_blank">.ipynb source</a>)
   [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/maths/infinityy.ipynb" target="_blank">Open in nbviewer</a>]
+* <a href="maths/Untitled.ipynb" target="_blank">maths/Untitled.ipynb</a>
+  (<a href="maths/Untitled.ipynb" target="_blank">.ipynb source</a>)
+  [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/maths/Untitled.ipynb" target="_blank">Open in nbviewer</a>]
+* <a href="maths/Untitled1.ipynb" target="_blank">maths/Untitled1.ipynb</a>
+  (<a href="maths/Untitled1.ipynb" target="_blank">.ipynb source</a>)
+  [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/maths/Untitled1.ipynb" target="_blank">Open in nbviewer</a>]
+* <a href="maths/Untitled2.ipynb" target="_blank">maths/Untitled2.ipynb</a>
+  (<a href="maths/Untitled2.ipynb" target="_blank">.ipynb source</a>)
+  [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/maths/Untitled2.ipynb" target="_blank">Open in nbviewer</a>]
+* <a href="maths/Untitled3.ipynb" target="_blank">maths/Untitled3.ipynb</a>
+  (<a href="maths/Untitled3.ipynb" target="_blank">.ipynb source</a>)
+  [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/maths/Untitled3.ipynb" target="_blank">Open in nbviewer</a>]
 * <a href="personalfinance/income_taxes.ipynb" target="_blank">personalfinance/income\_taxes.ipynb</a>
   (<a href="personalfinance/income_taxes.ipynb" target="_blank">.ipynb source</a>)
   [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/personalfinance/income_taxes.ipynb" target="_blank">Open in nbviewer</a>]
 * <a href="personalfinance/savings_interest_and_future_value.ipynb" target="_blank">personalfinance/savings\_interest\_and\_future\_value.ipynb</a>
   (<a href="personalfinance/savings_interest_and_future_value.ipynb" target="_blank">.ipynb source</a>)
   [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/personalfinance/savings_interest_and_future_value.ipynb" target="_blank">Open in nbviewer</a>]
+* <a href="USA/climate_change_and_disaster_relief.ipynb" target="_blank">USA/climate\_change\_and\_disaster\_relief.ipynb</a>
+  (<a href="USA/climate_change_and_disaster_relief.ipynb" target="_blank">.ipynb source</a>)
+  [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/USA/climate_change_and_disaster_relief.ipynb" target="_blank">Open in nbviewer</a>]
+* <a href="USA/merica.html" target="_blank">USA/merica.html</a>
+  (<a href="USA/merica.ipynb" target="_blank">.ipynb source</a>)
+  [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/USA/merica.ipynb" target="_blank">Open in nbviewer</a>]
+* <a href="USA/merica_-_without.html" target="_blank">USA/merica\_-\_without.html</a>
+  (<a href="USA/merica_-_without.ipynb" target="_blank">.ipynb source</a>)
+  [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/USA/merica_-_without.ipynb" target="_blank">Open in nbviewer</a>]
+* <a href="USA/Untitled.ipynb" target="_blank">USA/Untitled.ipynb</a>
+  (<a href="USA/Untitled.ipynb" target="_blank">.ipynb source</a>)
+  [<a href="https://nbviewer.jupyter.org/github/westurner/notebooks/blob/gh-pages/USA/Untitled.ipynb" target="_blank">Open in nbviewer</a>]
 

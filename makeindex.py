@@ -73,7 +73,7 @@ def makeindex(template, path='.',
         'title': title,
         'notebooks': sorted(
             find_notebooks(path, base_url=base_url, filterfn=filterfn),
-            key=lambda x: x['ipynb']),
+            key=lambda x: (x['ipynb'].lower(), x['ipynb'])),
         'header': header,
         'header_text': header_text,
         'footer': footer,
