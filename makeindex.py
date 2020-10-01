@@ -5,10 +5,10 @@ from __future__ import print_function
 makeindex
 """
 import sys
-import urllib
+import urllib.parse
 
 import jinja2
-import path as Path
+from path import Path  # pip install path.py
 
 
 def filter_ipynb(path):
@@ -25,15 +25,15 @@ def find_notebooks(path, pattern='*.ipynb',
                    base_url=None, filterfn=filter_ipynb):
     _base_url = None
     if base_url:
-        _, _url = urllib.splittype(base_url)
-        _base_url = base_url and Path.path(
+        _, _url = urllib.parse.splittype(base_url)
+        _base_url = base_url and Path(
             u'/'.join(('https://nbviewer.jupyter.org', _url.lstrip('/'))))
-    _path = Path.path(path)
-    for ipynb in _path.walk(pattern=pattern):
+    _path = Path(path)
+    for ipynb in _path.walk(match=pattern):
         if filterfn(ipynb):
             html = None
             _html = ipynb.splitext()[0] + '.html'
-            if Path.path(_html).exists():
+            if Path(_html).exists():
                 html = _html
             yield {
                 'ipynb': ipynb,
@@ -56,7 +56,7 @@ def makeindex(template, path='.',
         'notebooks': list(
             find_notebooks(path, base_url=base_url, filterfn=filterfn)),
     }
-    templatedir = Path.path(__file__).abspath().dirname() / 'templates'
+    templatedir = Path(__file__).abspath().dirname() / 'templates'
     loader = jinja2.FileSystemLoader(templatedir)
     env = jinja2.Environment()  # autoescape=True
     tmpl = loader.load(env, template)
