@@ -15,6 +15,7 @@ dependencies:
   - autopep8
   - babel
   - backcall
+  - black
   - bleach
   - bokeh
   - ca-certificates
