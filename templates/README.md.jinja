@@ -9,7 +9,7 @@
 * {% if nb.html -%}
 <a href="{{ nb.html }}" target="_blank">{{ nb.html.replace('_','\_') }}</a>
 {%- else -%}
-<a href="{{ nb.ipyb }}" target="_blank">{{ nb.ipynb.replace('_','\_') }}</a>
+<a href="{{ nb.ipynb }}" target="_blank">{{ nb.ipynb.replace('_','\_') }}</a>
 {%- endif %}
   (<a href="{{ nb.ipynb }}" target="_blank">.ipynb source</a>)
 {%- if nb.nbviewer %}
