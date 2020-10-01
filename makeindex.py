@@ -4,12 +4,16 @@ from __future__ import print_function
 """
 makeindex
 """
+import logging
 import os
 import sys
 import urllib.parse
 
 import jinja2
 from path import Path  # pip install path.py
+
+
+log = logging.getLogger()
 
 
 def filter_ipynb(path):
@@ -30,10 +34,11 @@ def find_notebooks(path, pattern='*.ipynb',
         _base_url = base_url and Path(
             u'/'.join(('https://nbviewer.jupyter.org', _url.lstrip('/'))))
     _path = Path(path)
-    for ipynb in _path.walk(match=pattern):
+    for _ipynb in _path.walk(match=pattern):
+        ipynb = Path(_ipynb).normpath()
         if filterfn(ipynb):
             html = None
-            _html = ipynb.splitext()[0] + '.html'
+            _html = Path(_ipynb.splitext()[0] + '.html').normpath()
             if Path(_html).exists():
                 html = _html
             yield {
@@ -45,6 +50,7 @@ def find_notebooks(path, pattern='*.ipynb',
 def makeindex(template, path='.',
               pattern='*.ipynb',
               base_url=None,
+              title=None,
               filterfn=filter_ipynb):
     """
     Generate an HTML index for a set of ipython notebooks
@@ -54,19 +60,29 @@ def makeindex(template, path='.',
      * README.md.jinja -- README.md index
     """
     templatename, _ = os.path.splitext(template)
-    header = path / Path(f'{templatename}.header.md')
-    footer = path / Path(f'{templatename}.footer.md')
+    _, ext = os.path.splitext(templatename)
+    header = path / Path(f'{templatename}.header{ext}')
+    footer = path / Path(f'{templatename}.footer{ext}')
     header_text = header.read_text() if header.exists() else ""
     footer_text = footer.read_text() if footer.exists() else ""
+    path = Path(path).normpath()
     context = {
-        'notebooks': list(
-            find_notebooks(path, base_url=base_url, filterfn=filterfn)),
+        'title': title,
+        'notebooks': sorted(
+            find_notebooks(path, base_url=base_url, filterfn=filterfn),
+            key=lambda x: x['ipynb']),
+        'header': header,
         'header_text': header_text,
+        'footer': footer,
         'footer_text': footer_text,
     }
     templatedir = Path(__file__).abspath().dirname() / 'templates'
     loader = jinja2.FileSystemLoader(templatedir)
     env = jinja2.Environment()  # autoescape=True
+    log.debug(dict(
+        template=template,
+        context=context)
+    )
     tmpl = loader.load(env, template)
     return tmpl.render(context)
 
@@ -106,6 +122,10 @@ def main(*args):
                    dest='readme',
                    action='store_true')
 
+    prs.add_option('--title',
+                   dest='title',
+                   action='store')
+
     prs.add_option('-v', '--verbose',
                    dest='verbose',
                    action='store_true',)
@@ -123,18 +143,20 @@ def main(*args):
         logging.basicConfig()
 
         if opts.verbose:
-            logging.getLogger().setLevel(logging.DEBUG)
+            global log
+            log = logging.getLogger()
+            log.setLevel(logging.DEBUG)
 
     if opts.run_tests:
         sys.argv = [sys.argv[0]] + args
         sys.exit(unittest.main())
 
     if opts.html:
-        output = makeindex("index.html.jinja", path='.', base_url=opts.base_url)
+        output = makeindex("index.html.jinja", path='.', base_url=opts.base_url, title=opts.title)
         print(output)
 
     if opts.readme:
-        output = makeindex("README.md.jinja", path='.', base_url=opts.base_url)
+        output = makeindex("README.md.jinja", path='.', base_url=opts.base_url, title=opts.title)
         print(output)
 
     return 0
