@@ -15,6 +15,8 @@
         <li>
           {%- if nb.html %}
           <a href="{{ nb.html }}" target="_blank">{{ nb.html }}</a>
+          {%- else %}
+          <a href="{{ nb.ipynb }}" target="_blank">{{ nb.ipynb }}</a>
           {%- endif %}
           (<a href="{{ nb.ipynb }}" target="_blank">.ipynb source</a>)
           {%- if nb.nbviewer %}
