@@ -83,17 +83,41 @@ run-all:
 	${PYTHON_OPTS} \
 	${FIND_NOTEBOOKS} -exec echo \; -exec echo "## {}" \; -exec jupyter-nbconvert --execute --to notebook --inplace {} \;
 
+header-footer-templates:
+	@#pip install markdown-it-py
+	markdown-it README.md.header.md > index.html.header.html
+	markdown-it README.md.footer.md > index.html.footer.html
+
 html-index:
 	python ./makeindex.py \
 		--html \
+		--title="westurner/notebooks - Jupyter notebooks" \
 		--base-url=/github/westurner/notebooks/blob/gh-pages/ > ./index.html
 
 readme-index:
 	python ./makeindex.py \
 		--readme \
+		--title="westurner/notebooks - Jupyter notebooks" \
 		--base-url=/github/westurner/notebooks/blob/gh-pages/ > ./README.md
 
 index: html-index readme-index
+
+index-html: html-index
+
+index-readme: readme-index
+
+index-test:
+	python ./makeindex.py \
+		-v \
+		--html \
+		--title="westurner/notebooks - Jupyter notebooks" \
+		--base-url=/github/westurner/notebooks/blob/gh-pages/ > ./index.html
+	python ./makeindex.py \
+		-v \
+		--readme \
+		--title="westurner/notebooks - Jupyter notebooks" \
+		--base-url=/github/westurner/notebooks/blob/gh-pages/ > ./README.md
+
 
 html-all:
 	${PYTHON_OPTS} \
