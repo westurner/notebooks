@@ -23,6 +23,9 @@ def filter_ipynb(path):
     # exclude .ipynb_checkpoints directories
     if '.ipynb_checkpoints' in path:
         return False
+    name, _ext = os.path.splitext(path)
+    if name.endswith('.nbconvert'):
+        return False
     return True
 
 
