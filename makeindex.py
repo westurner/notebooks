@@ -4,6 +4,7 @@ from __future__ import print_function
 """
 makeindex
 """
+import os
 import sys
 import urllib.parse
 
@@ -49,12 +50,19 @@ def makeindex(template, path='.',
     Generate an HTML index for a set of ipython notebooks
 
     Templates:
-     * index.jinja  -- HTML index
-     * readme.jinja -- README.md index
+     * index.html.jinja  -- HTML index
+     * README.md.jinja -- README.md index
     """
+    templatename, _ = os.path.splitext(template)
+    header = path / Path(f'{templatename}.header.md')
+    footer = path / Path(f'{templatename}.footer.md')
+    header_text = header.read_text() if header.exists() else ""
+    footer_text = footer.read_text() if footer.exists() else ""
     context = {
         'notebooks': list(
             find_notebooks(path, base_url=base_url, filterfn=filterfn)),
+        'header_text': header_text,
+        'footer_text': footer_text,
     }
     templatedir = Path(__file__).abspath().dirname() / 'templates'
     loader = jinja2.FileSystemLoader(templatedir)
@@ -122,11 +130,11 @@ def main(*args):
         sys.exit(unittest.main())
 
     if opts.html:
-        output = makeindex("index.jinja", path='.', base_url=opts.base_url)
+        output = makeindex("index.html.jinja", path='.', base_url=opts.base_url)
         print(output)
 
     if opts.readme:
-        output = makeindex("readme.jinja", path='.', base_url=opts.base_url)
+        output = makeindex("README.md.jinja", path='.', base_url=opts.base_url)
         print(output)
 
     return 0
