@@ -1,5 +1,11 @@
-default: download
+
+default: download checksums
 
 download:
-	wget --continue https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css
-	wget --continue https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css
+	wget https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css -O bootstrap.min.css
+
+
+srihash=awk '{ print $$1 }' | xxd -r -p | base64
+
+checksums:
+	sha384sum bootstrap.min.css | ${srihash}
